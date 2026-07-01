@@ -6,6 +6,6 @@ namespace Lishack\Combinatorics\Exception;
 
 use Webmozart\Assert\InvalidArgumentException;
 
-class InvalidCombinatoricsArgument extends InvalidArgumentException
+final class InvalidCombinatoricsArgument extends InvalidArgumentException
 {
 }
