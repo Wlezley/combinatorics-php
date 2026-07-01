@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Lishack\Combinatorics\Exception;
 
-class InvalidCombinatoricsArgument extends \InvalidArgumentException
+use Webmozart\Assert\InvalidArgumentException;
+
+class InvalidCombinatoricsArgument extends InvalidArgumentException
 {
 }
