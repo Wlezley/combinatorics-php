@@ -1,0 +1,12 @@
+parameters:
+    level: 8
+    inferPrivatePropertyTypeFromConstructor: true
+    reportUnmatchedIgnoredErrors: false
+    phpVersion: 80500 # PHP 8.5
+
+    paths:
+        - src
+
+    excludePaths:
+        - tests
+        - vendor
