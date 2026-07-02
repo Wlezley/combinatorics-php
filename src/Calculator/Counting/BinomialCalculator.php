@@ -16,14 +16,6 @@ final class BinomialCalculator
     }
 
     /**
-     * Calculates the binomial coefficient C(n, k)
-     *
-     * Mathematical definition:
-     * C(n, k) = n! / (k!(n-k)!)
-     *
-     * Uses the symmetry C(n, k) = C(n, n-k) and a multiplicative algorithm
-     * to avoid huge intermediate factorials.
-     *
      * @throws InvalidCombinatoricsArgument
      */
     public static function calculate(int $n, int $k): BigInteger

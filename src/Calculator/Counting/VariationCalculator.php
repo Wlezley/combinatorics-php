@@ -16,11 +16,6 @@ final class VariationCalculator
     }
 
     /**
-     * Calculates the number of variations without repetition.
-     *
-     * Mathematical definition:
-     * V(n, k) = n! / (n-k)!
-     *
      * @throws InvalidCombinatoricsArgument
      */
     public static function calculate(int $n, int $k): BigInteger
@@ -47,11 +42,6 @@ final class VariationCalculator
     }
 
     /**
-     * Calculates the number of variations with repetition.
-     *
-     * Mathematical definition:
-     * V'(n, k) = n^k
-     *
      * @throws InvalidCombinatoricsArgument
      */
     public static function calculateWithRepetition(int $n, int $k): BigInteger

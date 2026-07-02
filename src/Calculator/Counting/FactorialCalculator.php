@@ -16,11 +16,6 @@ final class FactorialCalculator
     }
 
     /**
-     * Calculates the factorial n!
-     *
-     * Mathematical definition:
-     * n! = 1 × 2 × ... × n
-     *
      * @throws InvalidCombinatoricsArgument
      */
     public static function calculate(int $n): BigInteger
