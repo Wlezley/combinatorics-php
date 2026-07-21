@@ -271,4 +271,49 @@ final class Combinatorics
             values: $values,
         );
     }
+
+    /**
+     * Creates a lazy generator that yields all variations WITHOUT repetition.
+     *
+     * A variation is an ordered selection of distinct elements from a set.
+     *
+     * @template TValue
+     *
+     * @param iterable<TValue> $values Source values.
+     * @param int $k Number of selected elements.
+     *
+     * @return Generator\VariationGenerator<TValue>
+     *
+     * @throws InvalidCombinatoricsArgument If the arguments are invalid.
+     */
+    public static function variations(iterable $values, int $k): Generator\VariationGenerator
+    {
+        return new Generator\VariationGenerator(
+            values: $values,
+            k: $k,
+        );
+    }
+
+    /**
+     * Creates a lazy generator that yields all variations WITH repetition.
+     *
+     * A variation with repetition is an ordered selection where each element may be chosen multiple times.
+     *
+     * @template TValue
+     *
+     * @param iterable<TValue> $values Source values.
+     * @param int $k Number of selected elements.
+     *
+     * @return Generator\VariationGenerator<TValue>
+     *
+     * @throws InvalidCombinatoricsArgument If the arguments are invalid.
+     */
+    public static function variationsWithRepetition(iterable $values, int $k): Generator\VariationGenerator
+    {
+        return new Generator\VariationGenerator(
+            values: $values,
+            k: $k,
+            allowRepetition: true,
+        );
+    }
 }
