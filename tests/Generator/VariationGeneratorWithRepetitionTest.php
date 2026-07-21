@@ -147,8 +147,6 @@ final class VariationGeneratorWithRepetitionTest extends TestCase
     }
 
     /**
-     * Returns all generated variations with repetition as an array.
-     *
      * @template TValue
      *
      * @param iterable<TValue> $values Source values.
