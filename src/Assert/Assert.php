@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Lishack\Combinatorics\Assert;
 
+use Brick\Math\BigInteger;
 use Lishack\Combinatorics\Exception\DuplicateValueException;
 use Lishack\Combinatorics\Exception\InvalidCombinatoricsArgument;
 use Lishack\Combinatorics\Exception\ValueNotFoundException;
@@ -44,6 +45,18 @@ final class Assert extends \Webmozart\Assert\Assert
                     'Value with key "%s" was not found.',
                     (string) $key,
                 ),
+            );
+        }
+    }
+
+    /**
+     * Asserts that the rank is within the valid range.
+     */
+    public static function rankInRange(BigInteger $rank, BigInteger $count): void
+    {
+        if ($rank->isLessThan(BigInteger::zero()) || $rank->isGreaterThanOrEqualTo($count)) {
+            self::reportInvalidArgument(
+                'Rank must be greater than or equal to 0 and less than the total number of possible results.'
             );
         }
     }

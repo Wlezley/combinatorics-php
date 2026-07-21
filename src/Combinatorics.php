@@ -8,6 +8,7 @@ use Brick\Math\BigInteger;
 use Lishack\Combinatorics\Enum\RankingOrder;
 use Lishack\Combinatorics\Exception\InvalidCombinatoricsArgument;
 use Lishack\Combinatorics\Ranking\CombinationRanker;
+use Lishack\Combinatorics\Ranking\CombinationUnranker;
 
 final class Combinatorics
 {
@@ -376,6 +377,29 @@ final class Combinatorics
             combination: $combination,
             order: $order,
             keySelector: $keySelector,
+        );
+    }
+
+    /**
+     * Calculates the combination for the specified lexicographic rank.
+     *
+     * @template TValue
+     *
+     * @param iterable<TValue> $universe The ordered set of all available values.
+     * @param BigInteger|int|string $rank The lexicographic rank of the combination.
+     * @param int $k The number of elements in the combination.
+     *
+     * @return list<TValue>
+     */
+    public static function combinationUnrank(
+        iterable $universe,
+        BigInteger|int|string $rank,
+        int $k,
+    ): array {
+        return CombinationUnranker::unrank(
+            universe: $universe,
+            rank: $rank,
+            k: $k,
         );
     }
 }
