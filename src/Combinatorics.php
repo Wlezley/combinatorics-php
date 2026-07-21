@@ -255,6 +255,24 @@ final class Combinatorics
     }
 
     /**
+     * Creates a lazy generator that yields the power set.
+     *
+     * The power set is the set of all subsets of the given set, including the empty set and the set itself.
+     *
+     * @template TValue
+     *
+     * @param iterable<TValue> $values Source values.
+     *
+     * @return Generator\PowerSetGenerator<TValue>
+     */
+    public static function powerSet(iterable $values): Generator\PowerSetGenerator
+    {
+        return new Generator\PowerSetGenerator(
+            values: $values,
+        );
+    }
+
+    /**
      * Creates a lazy generator that yields all permutations.
      *
      * A permutation is an ordered arrangement of all distinct elements of a set.
