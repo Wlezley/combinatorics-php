@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Lishack\Combinatorics;
 
 use Brick\Math\BigInteger;
+use Lishack\Combinatorics\Enum\RankingOrder;
 use Lishack\Combinatorics\Exception\InvalidCombinatoricsArgument;
+use Lishack\Combinatorics\Ranking\CombinationRanker;
 
 final class Combinatorics
 {
@@ -350,6 +352,30 @@ final class Combinatorics
     {
         return new Generator\CartesianProductGenerator(
             sets: $sets,
+        );
+    }
+
+    /**
+     * Calculates the rank of a combination.
+     *
+     * @template TValue
+     *
+     * @param iterable<TValue> $universe The ordered set of all available values.
+     * @param iterable<TValue> $combination The combination to rank.
+     * @param RankingOrder $order The ranking order to use.
+     * @param (callable(TValue): (int|string))|null $keySelector Maps custom values to unique integer or string keys.
+     */
+    public static function combinationRank(
+        iterable $universe,
+        iterable $combination,
+        RankingOrder $order = RankingOrder::Lexicographic,
+        ?callable $keySelector = null,
+    ): BigInteger {
+        return CombinationRanker::rank(
+            universe: $universe,
+            combination: $combination,
+            order: $order,
+            keySelector: $keySelector,
         );
     }
 }
