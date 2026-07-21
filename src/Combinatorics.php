@@ -214,7 +214,7 @@ final class Combinatorics
     }
 
     /**
-     * Creates a lazy generator that yields all combinations without repetition.
+     * Creates a lazy generator that yields all combinations WITHOUT repetition.
      *
      * @template TValue
      *
@@ -225,13 +225,32 @@ final class Combinatorics
      *
      * @throws InvalidCombinatoricsArgument
      */
-    public static function combinations(
-        iterable $values,
-        int $k,
-    ): Generator\CombinationGenerator {
+    public static function combinations(iterable $values, int $k): Generator\CombinationGenerator
+    {
         return new Generator\CombinationGenerator(
             values: $values,
             k: $k,
+        );
+    }
+
+    /**
+     * Creates a lazy generator that yields all combinations WITH repetition.
+     *
+     * @template TValue
+     *
+     * @param iterable<TValue> $values Source values.
+     * @param int $k Number of selected elements.
+     *
+     * @return Generator\CombinationGenerator<TValue>
+     *
+     * @throws InvalidCombinatoricsArgument
+     */
+    public static function combinationsWithRepetition(iterable $values, int $k): Generator\CombinationGenerator
+    {
+        return new Generator\CombinationGenerator(
+            values: $values,
+            k: $k,
+            allowRepetition: true,
         );
     }
 }

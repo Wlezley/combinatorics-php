@@ -13,14 +13,14 @@ use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(CombinationGenerator::class)]
-#[CoversMethod(Combinatorics::class, 'combinations')]
-final class CombinationGeneratorTest extends TestCase
+#[CoversMethod(Combinatorics::class, 'combinationsWithRepetition')]
+final class CombinationGeneratorWithRepetitionTest extends TestCase
 {
     public function testEmptyCombination(): void
     {
         self::assertSame(
             [[]],
-            self::combinations(['A', 'B', 'C'], 0),
+            self::combinations([], 0),
         );
     }
 
@@ -40,32 +40,43 @@ final class CombinationGeneratorTest extends TestCase
     {
         self::assertSame(
             [
+                ['A', 'A'],
                 ['A', 'B'],
                 ['A', 'C'],
-                ['A', 'D'],
+                ['B', 'B'],
                 ['B', 'C'],
-                ['B', 'D'],
-                ['C', 'D'],
+                ['C', 'C'],
             ],
-            self::combinations(['A', 'B', 'C', 'D'], 2),
+            self::combinations(['A', 'B', 'C'], 2),
         );
     }
 
-    public function testAllElementsCombination(): void
+    public function testThreeElementCombinations(): void
     {
         self::assertSame(
             [
+                ['A', 'A', 'A'],
+                ['A', 'A', 'B'],
+                ['A', 'A', 'C'],
+                ['A', 'B', 'B'],
                 ['A', 'B', 'C'],
+                ['A', 'C', 'C'],
+                ['B', 'B', 'B'],
+                ['B', 'B', 'C'],
+                ['B', 'C', 'C'],
+                ['C', 'C', 'C'],
             ],
             self::combinations(['A', 'B', 'C'], 3),
         );
     }
 
-    public function testEmptyInput(): void
+    public function testKGreaterThanNumberOfValues(): void
     {
         self::assertSame(
-            [[]],
-            self::combinations([], 0),
+            [
+                ['A', 'A', 'A'],
+            ],
+            self::combinations(['A'], 3),
         );
     }
 
@@ -74,16 +85,7 @@ final class CombinationGeneratorTest extends TestCase
         $this->expectException(InvalidCombinatoricsArgument::class);
 
         iterator_to_array(
-            Combinatorics::combinations(['A'], -1),
-        );
-    }
-
-    public function testKGreaterThanNumberOfValuesThrowsException(): void
-    {
-        $this->expectException(InvalidCombinatoricsArgument::class);
-
-        iterator_to_array(
-            Combinatorics::combinations(['A', 'B'], 3),
+            Combinatorics::combinationsWithRepetition(['A'], -1),
         );
     }
 
@@ -93,11 +95,27 @@ final class CombinationGeneratorTest extends TestCase
 
         self::assertSame(
             [
+                ['A', 'A'],
                 ['A', 'B'],
                 ['A', 'C'],
+                ['B', 'B'],
                 ['B', 'C'],
+                ['C', 'C'],
             ],
             self::combinations($values, 2),
+        );
+    }
+
+    public function testGeneratedCombinationCountMatchesCalculator(): void
+    {
+        $generated = iterator_to_array(
+            Combinatorics::combinationsWithRepetition(range(1, 5), 3),
+            false,
+        );
+
+        self::assertCount(
+            Combinatorics::combinationsWithRepetitionCount(5, 3)->toInt(),
+            $generated,
         );
     }
 
@@ -114,7 +132,7 @@ final class CombinationGeneratorTest extends TestCase
     private static function combinations(iterable $values, int $k): array
     {
         return iterator_to_array(
-            Combinatorics::combinations($values, $k),
+            Combinatorics::combinationsWithRepetition($values, $k),
             false,
         );
     }

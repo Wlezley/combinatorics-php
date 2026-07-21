@@ -23,13 +23,14 @@ final class CombinationGenerator implements IteratorAggregate
     private array $values;
 
     /**
-     * @throws InvalidCombinatoricsArgument
-     *
      * @param iterable<TValue> $values
+     *
+     * @throws InvalidCombinatoricsArgument
      */
     public function __construct(
         iterable $values,
         private readonly int $k,
+        private readonly bool $allowRepetition = false,
     ) {
         Assert::notNegativeInteger($this->k, 'Argument $k must be >= 0.');
 
@@ -39,11 +40,13 @@ final class CombinationGenerator implements IteratorAggregate
             $this->values = iterator_to_array($values, false);
         }
 
-        Assert::lessThanEq(
-            $this->k,
-            count($this->values),
-            'Argument $k must be <= number of values.'
-        );
+        if (!$this->allowRepetition) {
+            Assert::lessThanEq(
+                $this->k,
+                count($this->values),
+                'Argument $k must be <= number of values.'
+            );
+        }
     }
 
     /**
@@ -71,22 +74,37 @@ final class CombinationGenerator implements IteratorAggregate
         int $start,
         array $combination,
     ): Generator {
-        if (count($combination) === $this->k) {
+        $combinationCount = count($combination);
+
+        if ($combinationCount === $this->k) {
             yield $combination;
             return;
         }
 
-        $remaining = $this->k - count($combination);
-        $max = count($this->values) - $remaining;
-
-        for ($i = $start; $i <= $max; ++$i) {
+        for ($i = $start; $i <= $this->maxIndex($combinationCount); ++$i) {
             $next = $combination;
             $next[] = $this->values[$i];
 
             yield from $this->generate(
-                start: $i + 1,
+                start: $this->nextStart($i),
                 combination: $next,
             );
         }
+    }
+
+    private function nextStart(int $index): int
+    {
+        return $this->allowRepetition ? $index : $index + 1;
+    }
+
+    private function maxIndex(int $combinationCount): int
+    {
+        $valueCount = count($this->values);
+
+        if ($this->allowRepetition) {
+            return $valueCount - 1;
+        }
+
+        return $valueCount - ($this->k - $combinationCount);
     }
 }
