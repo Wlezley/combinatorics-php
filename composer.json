@@ -7,6 +7,11 @@
             "Lishack\\Combinatorics\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Lishack\\Combinatorics\\Tests\\": "tests/"
+        }
+    },
     "require": {
         "php": ">=8.4",
         "brick/math": "^0.18.0",

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Generator;
+namespace Lishack\Combinatorics\Tests\Generator;
 
 use ArrayIterator;
 use Lishack\Combinatorics\Combinatorics;

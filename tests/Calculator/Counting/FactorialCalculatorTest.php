@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Calculator\Counting;
+namespace Lishack\Combinatorics\Tests\Calculator\Counting;
 
 use Brick\Math\BigInteger;
 use Lishack\Combinatorics\Calculator\Counting\FactorialCalculator;
