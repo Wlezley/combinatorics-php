@@ -9,16 +9,18 @@
     },
     "require": {
         "php": ">=8.4",
-        "webmozart/assert": "^2.4",
-        "brick/math": "^0.18.0"
+        "brick/math": "^0.18.0",
+        "webmozart/assert": "^2.4"
     },
     "require-dev": {
-        "phpstan/phpstan": "^2.2",
         "phpstan/extension-installer": "^1.4",
+        "phpstan/phpstan": "^2.2",
         "phpstan/phpstan-webmozart-assert": "^2.0",
+        "phpunit/phpunit": "^12.5",
         "slevomat/coding-standard": "^8.30"
     },
     "config": {
+        "sort-packages": true,
         "allow-plugins": {
             "phpstan/extension-installer": true,
             "dealerdirect/phpcodesniffer-composer-installer": true
@@ -30,6 +32,7 @@
     "scripts": {
         "lint": "phpcs",
         "lint-fix": "phpcbf",
-        "phpstan": "phpstan analyse --memory-limit 512M"
+        "phpstan": "phpstan analyse --memory-limit 512M",
+        "test": "phpunit"
     }
 }
