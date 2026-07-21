@@ -20,7 +20,7 @@ final class CombinationGeneratorWithRepetitionTest extends TestCase
     {
         self::assertSame(
             [[]],
-            self::combinations([], 0),
+            self::combinationsWithRepetition([], 0),
         );
     }
 
@@ -32,7 +32,7 @@ final class CombinationGeneratorWithRepetitionTest extends TestCase
                 ['B'],
                 ['C'],
             ],
-            self::combinations(['A', 'B', 'C'], 1),
+            self::combinationsWithRepetition(['A', 'B', 'C'], 1),
         );
     }
 
@@ -47,7 +47,7 @@ final class CombinationGeneratorWithRepetitionTest extends TestCase
                 ['B', 'C'],
                 ['C', 'C'],
             ],
-            self::combinations(['A', 'B', 'C'], 2),
+            self::combinationsWithRepetition(['A', 'B', 'C'], 2),
         );
     }
 
@@ -66,7 +66,7 @@ final class CombinationGeneratorWithRepetitionTest extends TestCase
                 ['B', 'C', 'C'],
                 ['C', 'C', 'C'],
             ],
-            self::combinations(['A', 'B', 'C'], 3),
+            self::combinationsWithRepetition(['A', 'B', 'C'], 3),
         );
     }
 
@@ -76,7 +76,7 @@ final class CombinationGeneratorWithRepetitionTest extends TestCase
             [
                 ['A', 'A', 'A'],
             ],
-            self::combinations(['A'], 3),
+            self::combinationsWithRepetition(['A'], 3),
         );
     }
 
@@ -84,7 +84,7 @@ final class CombinationGeneratorWithRepetitionTest extends TestCase
     {
         $this->expectException(InvalidCombinatoricsArgument::class);
 
-        self::combinations(['A'], -1);
+        self::combinationsWithRepetition(['A'], -1);
     }
 
     public function testGeneratorAcceptsTraversable(): void
@@ -98,7 +98,7 @@ final class CombinationGeneratorWithRepetitionTest extends TestCase
                 ['B', 'C'],
                 ['C', 'C'],
             ],
-            self::combinations(
+            self::combinationsWithRepetition(
                 values: new ArrayIterator(['A', 'B', 'C']),
                 k: 2,
             ),
@@ -109,7 +109,7 @@ final class CombinationGeneratorWithRepetitionTest extends TestCase
     {
         self::assertCount(
             Combinatorics::combinationsWithRepetitionCount(5, 3)->toInt(),
-            self::combinations(range(1, 5), 3),
+            self::combinationsWithRepetition(range(1, 5), 3),
         );
     }
 
@@ -123,7 +123,7 @@ final class CombinationGeneratorWithRepetitionTest extends TestCase
      *
      * @throws InvalidCombinatoricsArgument
      */
-    private static function combinations(iterable $values, int $k): array
+    private static function combinationsWithRepetition(iterable $values, int $k): array
     {
         return iterator_to_array(
             Combinatorics::combinationsWithRepetition($values, $k),
