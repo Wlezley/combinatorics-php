@@ -73,31 +73,28 @@ final class CombinationGeneratorTest extends TestCase
     {
         $this->expectException(InvalidCombinatoricsArgument::class);
 
-        iterator_to_array(
-            Combinatorics::combinations(['A'], -1),
-        );
+        self::combinations(['A'], -1);
     }
 
     public function testKGreaterThanNumberOfValuesThrowsException(): void
     {
         $this->expectException(InvalidCombinatoricsArgument::class);
 
-        iterator_to_array(
-            Combinatorics::combinations(['A', 'B'], 3),
-        );
+        self::combinations(['A', 'B'], 3);
     }
 
     public function testGeneratorAcceptsTraversable(): void
     {
-        $values = new ArrayIterator(['A', 'B', 'C']);
-
         self::assertSame(
             [
                 ['A', 'B'],
                 ['A', 'C'],
                 ['B', 'C'],
             ],
-            self::combinations($values, 2),
+            self::combinations(
+                values: new ArrayIterator(['A', 'B', 'C']),
+                k: 2,
+            ),
         );
     }
 
