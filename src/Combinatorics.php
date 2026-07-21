@@ -334,4 +334,22 @@ final class Combinatorics
             allowRepetition: true,
         );
     }
+
+    /**
+     * Creates a lazy generator that yields the Cartesian product of the given sets.
+     *
+     * Each generated value contains one element from every input set.
+     *
+     * @template TValue
+     *
+     * @param iterable<iterable<TValue>> $sets Source sets.
+     *
+     * @return Generator\CartesianProductGenerator<TValue>
+     */
+    public static function cartesianProduct(iterable $sets): Generator\CartesianProductGenerator
+    {
+        return new Generator\CartesianProductGenerator(
+            sets: $sets,
+        );
+    }
 }
