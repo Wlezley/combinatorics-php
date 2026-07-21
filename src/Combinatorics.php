@@ -212,4 +212,26 @@ final class Combinatorics
             k: $k
         );
     }
+
+    /**
+     * Creates a lazy generator that yields all combinations without repetition.
+     *
+     * @template TValue
+     *
+     * @param iterable<TValue> $values Source values.
+     * @param int $k Number of selected elements.
+     *
+     * @return Generator\CombinationGenerator<TValue>
+     *
+     * @throws InvalidCombinatoricsArgument
+     */
+    public static function combinations(
+        iterable $values,
+        int $k,
+    ): Generator\CombinationGenerator {
+        return new Generator\CombinationGenerator(
+            values: $values,
+            k: $k,
+        );
+    }
 }
