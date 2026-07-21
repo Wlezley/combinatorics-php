@@ -253,4 +253,22 @@ final class Combinatorics
             allowRepetition: true,
         );
     }
+
+    /**
+     * Creates a lazy generator that yields all permutations.
+     *
+     * A permutation is an ordered arrangement of all distinct elements of a set.
+     *
+     * @template TValue
+     *
+     * @param iterable<TValue> $values Source values.
+     *
+     * @return Generator\PermutationGenerator<TValue>
+     */
+    public static function permutations(iterable $values): Generator\PermutationGenerator
+    {
+        return new Generator\PermutationGenerator(
+            values: $values,
+        );
+    }
 }
