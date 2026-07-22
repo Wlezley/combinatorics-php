@@ -10,6 +10,7 @@ use Lishack\Combinatorics\Exception\InvalidCombinatoricsArgument;
 use Lishack\Combinatorics\Ranking\CombinationRanker;
 use Lishack\Combinatorics\Ranking\CombinationUnranker;
 use Lishack\Combinatorics\Ranking\VariationRanker;
+use Lishack\Combinatorics\Ranking\VariationUnranker;
 
 final class Combinatorics
 {
@@ -422,6 +423,29 @@ final class Combinatorics
             universe: $universe,
             variation: $variation,
             keySelector: $keySelector,
+        );
+    }
+
+    /**
+     * Returns the variation at the specified lexicographic rank.
+     *
+     * @template TValue
+     *
+     * @param iterable<TValue> $universe The ordered set of all available values.
+     * @param BigInteger|int|string $rank Zero-based lexicographic rank.
+     * @param int $k Number of selected values.
+     *
+     * @return list<TValue>
+     */
+    public static function variationUnrank(
+        iterable $universe,
+        BigInteger|int|string $rank,
+        int $k,
+    ): array {
+        return VariationUnranker::unrank(
+            universe: $universe,
+            rank: $rank,
+            k: $k,
         );
     }
 }
