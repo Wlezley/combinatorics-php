@@ -9,6 +9,8 @@ use Lishack\Combinatorics\Enum\RankingOrder;
 use Lishack\Combinatorics\Exception\InvalidCombinatoricsArgument;
 use Lishack\Combinatorics\Ranking\CombinationRanker;
 use Lishack\Combinatorics\Ranking\CombinationUnranker;
+use Lishack\Combinatorics\Ranking\PermutationRanker;
+use Lishack\Combinatorics\Ranking\PermutationUnranker;
 use Lishack\Combinatorics\Ranking\VariationRanker;
 use Lishack\Combinatorics\Ranking\VariationUnranker;
 
@@ -446,6 +448,47 @@ final class Combinatorics
             universe: $universe,
             rank: $rank,
             k: $k,
+        );
+    }
+
+    /**
+     * Calculates the zero-based lexicographic rank of a permutation.
+     *
+     * @template TValue
+     *
+     * @param iterable<TValue> $universe Ordered set of all available values.
+     * @param iterable<TValue> $permutation Permutation to rank.
+     * @param (callable(TValue): (int|string))|null $keySelector Maps custom values to unique integer or string keys.
+     */
+    public static function permutationRank(
+        iterable $universe,
+        iterable $permutation,
+        ?callable $keySelector = null,
+    ): BigInteger {
+        return PermutationRanker::rank(
+            universe: $universe,
+            permutation: $permutation,
+            keySelector: $keySelector,
+        );
+    }
+
+    /**
+     * Returns the permutation at the specified lexicographic rank.
+     *
+     * @template TValue
+     *
+     * @param iterable<TValue> $universe Ordered set of all available values.
+     * @param BigInteger|int|string $rank Zero-based lexicographic rank.
+     *
+     * @return list<TValue>
+     */
+    public static function permutationUnrank(
+        iterable $universe,
+        BigInteger|int|string $rank,
+    ): array {
+        return PermutationUnranker::unrank(
+            universe: $universe,
+            rank: $rank,
         );
     }
 }
