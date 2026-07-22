@@ -99,6 +99,45 @@ final class ValueIndexer
     }
 
     /**
+     * Resolves values to their offsets within the remaining available values.
+     *
+     * This is equivalent to the Lehmer code representation and is primarily used
+     * for ranking and unranking variations.
+     *
+     * @template TValue
+     *
+     * @param iterable<TValue> $universe
+     * @param iterable<TValue> $values
+     * @param (callable(TValue): (int|string))|null $keySelector
+     *
+     * @return list<int>
+     */
+    public static function resolveLehmerDigits(iterable $universe, iterable $values, ?callable $keySelector = null): array
+    {
+        $available = self::resolveKeys(
+            values: $universe,
+            keySelector: $keySelector,
+        );
+
+        $offsets = [];
+
+        foreach (self::resolveKeys($values, $keySelector) as $key) {
+            $offset = array_search($key, $available, true);
+
+            Assert::notFalse(
+                $offset,
+                sprintf('Value "%s" does not exist in the universe.', (string) $key),
+            );
+
+            $offsets[] = $offset;
+
+            array_splice($available, $offset, 1);
+        }
+
+        return $offsets;
+    }
+
+    /**
      * Returns a unique key representing the given value.
      *
      * @template TValue

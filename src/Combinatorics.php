@@ -9,6 +9,7 @@ use Lishack\Combinatorics\Enum\RankingOrder;
 use Lishack\Combinatorics\Exception\InvalidCombinatoricsArgument;
 use Lishack\Combinatorics\Ranking\CombinationRanker;
 use Lishack\Combinatorics\Ranking\CombinationUnranker;
+use Lishack\Combinatorics\Ranking\VariationRanker;
 
 final class Combinatorics
 {
@@ -400,6 +401,27 @@ final class Combinatorics
             universe: $universe,
             rank: $rank,
             k: $k,
+        );
+    }
+
+    /**
+     * Calculates the zero-based lexicographic rank of a variation.
+     *
+     * @template TValue
+     *
+     * @param iterable<TValue> $universe The ordered set of all available values.
+     * @param iterable<TValue> $variation The variation to rank.
+     * @param (callable(TValue): (int|string))|null $keySelector Maps custom values to unique integer or string keys.
+     */
+    public static function variationRank(
+        iterable $universe,
+        iterable $variation,
+        ?callable $keySelector = null,
+    ): BigInteger {
+        return VariationRanker::rank(
+            universe: $universe,
+            variation: $variation,
+            keySelector: $keySelector,
         );
     }
 }

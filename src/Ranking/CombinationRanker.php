@@ -25,9 +25,11 @@ final class CombinationRanker
      *
      * @template TValue
      *
-     * @param iterable<TValue> $universe
-     * @param iterable<TValue> $combination
-     * @param (callable(TValue): (int|string))|null $keySelector
+     * @param iterable<TValue> $universe Ordered set of all available values.
+     * @param iterable<TValue> $combination Combination to rank.
+     * @param (callable(TValue): (int|string))|null $keySelector Maps custom values to unique integer or string keys.
+     *
+     * @return BigInteger Zero-based rank.
      */
     public static function rank(
         iterable $universe,
