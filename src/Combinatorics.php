@@ -394,14 +394,25 @@ final class Combinatorics
     }
 
     /**
-     * Calculates the rank of a combination.
+     * Calculates the zero-based rank of a combination.
+     *
+     * The rank uniquely identifies a combination according to the selected ranking order.
+     * It can later be used to reconstruct the same combination using combinationUnrank().
      *
      * @template TValue
      *
      * @param iterable<TValue> $universe The ordered set of all available values.
      * @param iterable<TValue> $combination The combination to rank.
      * @param RankingOrder $order The ranking order to use.
-     * @param (callable(TValue): (int|string))|null $keySelector Maps custom values to unique integer or string keys.
+     * @param (callable(TValue): (int|string))|null $keySelector
+     *        Optional callback that returns a unique comparison key for each element.
+     *        Required when comparing objects or other non-scalar values.
+     *
+     * @return BigInteger The zero-based rank of the combination.
+     *
+     * @throws InvalidCombinatoricsArgument If the arguments are invalid.
+     *
+     * @see https://en.wikipedia.org/wiki/Ranking
      */
     public static function combinationRank(
         iterable $universe,
@@ -418,15 +429,23 @@ final class Combinatorics
     }
 
     /**
-     * Calculates the combination for the specified lexicographic rank.
+     * Reconstructs a combination from its zero-based rank.
+     *
+     * Returns the combination corresponding to the specified rank according to the lexicographic ranking order.
+     *
+     * This method is the inverse operation of combinationRank().
      *
      * @template TValue
      *
      * @param iterable<TValue> $universe The ordered set of all available values.
-     * @param BigInteger|int|string $rank The lexicographic rank of the combination.
-     * @param int $k The number of elements in the combination.
+     * @param BigInteger|int|string $rank The zero-based lexicographic rank of the combination.
+     * @param int $k Number of selected elements.
      *
-     * @return list<TValue>
+     * @return list<TValue> The reconstructed combination.
+     *
+     * @throws InvalidCombinatoricsArgument If the arguments are invalid.
+     *
+     * @see https://en.wikipedia.org/wiki/Ranking
      */
     public static function combinationUnrank(
         iterable $universe,
