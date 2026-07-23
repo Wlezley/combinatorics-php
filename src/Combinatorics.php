@@ -221,7 +221,11 @@ final class Combinatorics
     }
 
     /**
-     * Creates a lazy generator that yields all combinations WITHOUT repetition.
+     * Creates a lazy generator that yields all combinations without repetition.
+     *
+     * A combination is an unordered selection of k distinct elements from a set of n distinct elements.
+     *
+     * Each combination is generated on demand without storing all combinations in memory.
      *
      * @template TValue
      *
@@ -230,7 +234,9 @@ final class Combinatorics
      *
      * @return Generator\CombinationGenerator<TValue>
      *
-     * @throws InvalidCombinatoricsArgument
+     * @throws InvalidCombinatoricsArgument If the arguments are invalid.
+     *
+     * @see https://en.wikipedia.org/wiki/Combination
      */
     public static function combinations(iterable $values, int $k): Generator\CombinationGenerator
     {
@@ -241,7 +247,12 @@ final class Combinatorics
     }
 
     /**
-     * Creates a lazy generator that yields all combinations WITH repetition.
+     * Creates a lazy generator that yields all combinations with repetition.
+     *
+     * A combination with repetition is an unordered selection of `k` elements from
+     * a set where individual elements may be selected multiple times.
+     *
+     * Each combination is generated on demand without storing all combinations in memory.
      *
      * @template TValue
      *
@@ -250,7 +261,9 @@ final class Combinatorics
      *
      * @return Generator\CombinationGenerator<TValue>
      *
-     * @throws InvalidCombinatoricsArgument
+     * @throws InvalidCombinatoricsArgument If the arguments are invalid.
+     *
+     * @see https://en.wikipedia.org/wiki/Combination#Number_of_combinations_with_repetition
      */
     public static function combinationsWithRepetition(iterable $values, int $k): Generator\CombinationGenerator
     {
@@ -264,13 +277,17 @@ final class Combinatorics
     /**
      * Creates a lazy generator that yields the power set.
      *
-     * The power set is the set of all subsets of the given set, including the empty set and the set itself.
+     * The power set is the set of all subsets of a given set, including the empty set and the set itself.
+     *
+     * Each subset is generated on demand without storing the complete power set in memory.
      *
      * @template TValue
      *
      * @param iterable<TValue> $values Source values.
      *
      * @return Generator\PowerSetGenerator<TValue>
+     *
+     * @see https://en.wikipedia.org/wiki/Power_set
      */
     public static function powerSet(iterable $values): Generator\PowerSetGenerator
     {
@@ -284,11 +301,15 @@ final class Combinatorics
      *
      * A permutation is an ordered arrangement of all distinct elements of a set.
      *
+     * Each permutation is generated on demand without storing all permutations in memory.
+     *
      * @template TValue
      *
      * @param iterable<TValue> $values Source values.
      *
      * @return Generator\PermutationGenerator<TValue>
+     *
+     * @see https://en.wikipedia.org/wiki/Permutation
      */
     public static function permutations(iterable $values): Generator\PermutationGenerator
     {
@@ -298,9 +319,11 @@ final class Combinatorics
     }
 
     /**
-     * Creates a lazy generator that yields all variations WITHOUT repetition.
+     * Creates a lazy generator that yields all variations without repetition.
      *
-     * A variation is an ordered selection of distinct elements from a set.
+     * A variation is an ordered selection of k distinct elements from a set of n distinct elements.
+     *
+     * Each variation is generated on demand without storing all variations in memory.
      *
      * @template TValue
      *
@@ -310,6 +333,8 @@ final class Combinatorics
      * @return Generator\VariationGenerator<TValue>
      *
      * @throws InvalidCombinatoricsArgument If the arguments are invalid.
+     *
+     * @see https://en.wikipedia.org/wiki/Permutation#k-permutations_of_n
      */
     public static function variations(iterable $values, int $k): Generator\VariationGenerator
     {
@@ -320,9 +345,11 @@ final class Combinatorics
     }
 
     /**
-     * Creates a lazy generator that yields all variations WITH repetition.
+     * Creates a lazy generator that yields all variations with repetition.
      *
-     * A variation with repetition is an ordered selection where each element may be chosen multiple times.
+     * A variation with repetition is an ordered selection of k elements where each element may be selected multiple times.
+     *
+     * Each variation is generated on demand without storing all variations in memory.
      *
      * @template TValue
      *
@@ -332,6 +359,8 @@ final class Combinatorics
      * @return Generator\VariationGenerator<TValue>
      *
      * @throws InvalidCombinatoricsArgument If the arguments are invalid.
+     *
+     * @see https://en.wikipedia.org/wiki/Permutation#Permutations_with_repetition
      */
     public static function variationsWithRepetition(iterable $values, int $k): Generator\VariationGenerator
     {
@@ -345,13 +374,17 @@ final class Combinatorics
     /**
      * Creates a lazy generator that yields the Cartesian product of the given sets.
      *
-     * Each generated value contains one element from every input set.
+     * The Cartesian product contains all ordered tuples formed by selecting exactly one element from each input set.
+     *
+     * Each tuple is generated on demand without storing the complete Cartesian product in memory.
      *
      * @template TValue
      *
      * @param iterable<iterable<TValue>> $sets Source sets.
      *
      * @return Generator\CartesianProductGenerator<TValue>
+     *
+     * @see https://en.wikipedia.org/wiki/Cartesian_product
      */
     public static function cartesianProduct(iterable $sets): Generator\CartesianProductGenerator
     {
