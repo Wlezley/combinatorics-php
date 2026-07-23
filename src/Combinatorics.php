@@ -462,11 +462,22 @@ final class Combinatorics
     /**
      * Calculates the zero-based lexicographic rank of a variation.
      *
+     * The rank uniquely identifies a variation according to the lexicographic ordering.
+     * It can later be used to reconstruct the same variation using variationUnrank().
+     *
      * @template TValue
      *
      * @param iterable<TValue> $universe The ordered set of all available values.
      * @param iterable<TValue> $variation The variation to rank.
-     * @param (callable(TValue): (int|string))|null $keySelector Maps custom values to unique integer or string keys.
+     * @param (callable(TValue): (int|string))|null $keySelector
+     *        Optional callback that returns a unique comparison key for each element.
+     *        Required when comparing objects or other non-scalar values.
+     *
+     * @return BigInteger The zero-based lexicographic rank.
+     *
+     * @throws InvalidCombinatoricsArgument If the arguments are invalid.
+     *
+     * @see https://en.wikipedia.org/wiki/Ranking
      */
     public static function variationRank(
         iterable $universe,
@@ -481,15 +492,23 @@ final class Combinatorics
     }
 
     /**
-     * Returns the variation at the specified lexicographic rank.
+     * Reconstructs a variation from its zero-based lexicographic rank.
+     *
+     * Returns the variation corresponding to the specified rank in lexicographic order.
+     *
+     * This method is the inverse operation of variationRank().
      *
      * @template TValue
      *
      * @param iterable<TValue> $universe The ordered set of all available values.
-     * @param BigInteger|int|string $rank Zero-based lexicographic rank.
-     * @param int $k Number of selected values.
+     * @param BigInteger|int|string $rank The zero-based lexicographic rank.
+     * @param int $k Number of selected elements.
      *
-     * @return list<TValue>
+     * @return list<TValue> The reconstructed variation.
+     *
+     * @throws InvalidCombinatoricsArgument If the arguments are invalid.
+     *
+     * @see https://en.wikipedia.org/wiki/Ranking
      */
     public static function variationUnrank(
         iterable $universe,
