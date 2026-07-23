@@ -7,8 +7,8 @@ namespace Lishack\Combinatorics\Ranking;
 use Brick\Math\BigInteger;
 use Lishack\Combinatorics\Assert\Assert;
 use Lishack\Combinatorics\Calculator\Counting\VariationCalculator;
-use Lishack\Combinatorics\Internal\IterableNormalizer;
-use Lishack\Combinatorics\Internal\ValueIndexer;
+use Lishack\Combinatorics\Utils\IterableNormalizer;
+use Lishack\Combinatorics\Utils\ValueIndexer;
 
 final class VariationRanker
 {

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Lishack\Combinatorics\Ranking;
 
 use Brick\Math\BigInteger;
-use Lishack\Combinatorics\Internal\IterableNormalizer;
+use Lishack\Combinatorics\Utils\IterableNormalizer;
 
 final class PermutationUnranker
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Lishack\Combinatorics\Internal;
+namespace Lishack\Combinatorics\Utils;
 
 use BackedEnum;
 use Lishack\Combinatorics\Assert\Assert;

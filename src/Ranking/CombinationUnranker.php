@@ -7,7 +7,7 @@ namespace Lishack\Combinatorics\Ranking;
 use Brick\Math\BigInteger;
 use Lishack\Combinatorics\Assert\Assert;
 use Lishack\Combinatorics\Calculator\Counting\BinomialCalculator;
-use Lishack\Combinatorics\Internal\IterableNormalizer;
+use Lishack\Combinatorics\Utils\IterableNormalizer;
 
 /**
  * Unranks combinations in lexicographic order.

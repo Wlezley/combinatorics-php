@@ -8,7 +8,7 @@ use Brick\Math\BigInteger;
 use Lishack\Combinatorics\Calculator\Counting\BinomialCalculator;
 use Lishack\Combinatorics\Enum\RankingOrder;
 use Lishack\Combinatorics\Exception\InvalidCombinatoricsArgument;
-use Lishack\Combinatorics\Internal\ValueIndexer;
+use Lishack\Combinatorics\Utils\ValueIndexer;
 
 /**
  * Ranks combinations in lexicographic or colexicographic order.
