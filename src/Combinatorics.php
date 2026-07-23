@@ -525,11 +525,22 @@ final class Combinatorics
     /**
      * Calculates the zero-based lexicographic rank of a permutation.
      *
+     * The rank uniquely identifies a permutation according to the lexicographic ordering.
+     * It can later be used to reconstruct the same permutation using permutationUnrank().
+     *
      * @template TValue
      *
-     * @param iterable<TValue> $universe Ordered set of all available values.
-     * @param iterable<TValue> $permutation Permutation to rank.
-     * @param (callable(TValue): (int|string))|null $keySelector Maps custom values to unique integer or string keys.
+     * @param iterable<TValue> $universe The ordered set of all available values.
+     * @param iterable<TValue> $permutation The permutation to rank.
+     * @param (callable(TValue): (int|string))|null $keySelector
+     *        Optional callback that returns a unique comparison key for each element.
+     *        Required when comparing objects or other non-scalar values.
+     *
+     * @return BigInteger The zero-based lexicographic rank.
+     *
+     * @throws InvalidCombinatoricsArgument If the arguments are invalid.
+     *
+     * @see https://en.wikipedia.org/wiki/Ranking
      */
     public static function permutationRank(
         iterable $universe,
@@ -544,14 +555,22 @@ final class Combinatorics
     }
 
     /**
-     * Returns the permutation at the specified lexicographic rank.
+     * Reconstructs a permutation from its zero-based lexicographic rank.
+     *
+     * Returns the permutation corresponding to the specified rank in lexicographic order.
+     *
+     * This method is the inverse operation of permutationRank().
      *
      * @template TValue
      *
-     * @param iterable<TValue> $universe Ordered set of all available values.
-     * @param BigInteger|int|string $rank Zero-based lexicographic rank.
+     * @param iterable<TValue> $universe The ordered set of all available values.
+     * @param BigInteger|int|string $rank The zero-based lexicographic rank.
      *
-     * @return list<TValue>
+     * @return list<TValue> The reconstructed permutation.
+     *
+     * @throws InvalidCombinatoricsArgument If the arguments are invalid.
+     *
+     * @see https://en.wikipedia.org/wiki/Ranking
      */
     public static function permutationUnrank(
         iterable $universe,
