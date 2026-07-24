@@ -6,12 +6,15 @@ namespace Lishack\Combinatorics\Tests\Calculator\Counting;
 
 use Brick\Math\BigInteger;
 use Lishack\Combinatorics\Calculator\Counting\BinomialCalculator;
+use Lishack\Combinatorics\Combinatorics;
 use Lishack\Combinatorics\Exception\InvalidCombinatoricsArgument;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(BinomialCalculator::class)]
+#[CoversMethod(Combinatorics::class, 'binomial')]
 class BinomialCalculatorTest extends TestCase
 {
     #[DataProvider('provideCalculate')]
@@ -21,7 +24,7 @@ class BinomialCalculatorTest extends TestCase
         string $expected,
     ): void {
         self::assertTrue(
-            BinomialCalculator::calculate($n, $k)
+            Combinatorics::binomial($n, $k)
                 ->isEqualTo(BigInteger::of($expected))
         );
     }
@@ -57,9 +60,9 @@ class BinomialCalculatorTest extends TestCase
     public function testSymmetry(int $n, int $k): void
     {
         self::assertTrue(
-            BinomialCalculator::calculate($n, $k)
+            Combinatorics::binomial($n, $k)
                 ->isEqualTo(
-                    BinomialCalculator::calculate($n, $n - $k)
+                    Combinatorics::binomial($n, $n - $k)
                 )
         );
     }
@@ -82,7 +85,7 @@ class BinomialCalculatorTest extends TestCase
     ): void {
         $this->expectException(InvalidCombinatoricsArgument::class);
 
-        BinomialCalculator::calculate($n, $k);
+        Combinatorics::binomial($n, $k);
     }
 
     /**

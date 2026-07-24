@@ -6,12 +6,16 @@ namespace Lishack\Combinatorics\Tests\Calculator\Counting;
 
 use Brick\Math\BigInteger;
 use Lishack\Combinatorics\Calculator\Counting\VariationCalculator;
+use Lishack\Combinatorics\Combinatorics;
 use Lishack\Combinatorics\Exception\InvalidCombinatoricsArgument;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(VariationCalculator::class)]
+#[CoversMethod(Combinatorics::class, 'variationsCount')]
+#[CoversMethod(Combinatorics::class, 'variationsWithRepetitionCount')]
 class VariationCalculatorTest extends TestCase
 {
     #[DataProvider('provideCalculate')]
@@ -21,7 +25,7 @@ class VariationCalculatorTest extends TestCase
         string $expected,
     ): void {
         self::assertTrue(
-            VariationCalculator::calculate($n, $k)
+            Combinatorics::variationsCount($n, $k)
                 ->isEqualTo(BigInteger::of($expected))
         );
     }
@@ -51,7 +55,7 @@ class VariationCalculatorTest extends TestCase
     ): void {
         $this->expectException(InvalidCombinatoricsArgument::class);
 
-        VariationCalculator::calculate($n, $k);
+        Combinatorics::variationsCount($n, $k);
     }
 
     /**
@@ -72,7 +76,7 @@ class VariationCalculatorTest extends TestCase
         string $expected,
     ): void {
         self::assertTrue(
-            VariationCalculator::calculateWithRepetition($n, $k)
+            Combinatorics::variationsWithRepetitionCount($n, $k)
                 ->isEqualTo(BigInteger::of($expected))
         );
     }
@@ -103,7 +107,7 @@ class VariationCalculatorTest extends TestCase
     ): void {
         $this->expectException(InvalidCombinatoricsArgument::class);
 
-        VariationCalculator::calculateWithRepetition($n, $k);
+        Combinatorics::variationsWithRepetitionCount($n, $k);
     }
 
     /**

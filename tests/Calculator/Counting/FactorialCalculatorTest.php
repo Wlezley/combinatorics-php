@@ -6,12 +6,15 @@ namespace Lishack\Combinatorics\Tests\Calculator\Counting;
 
 use Brick\Math\BigInteger;
 use Lishack\Combinatorics\Calculator\Counting\FactorialCalculator;
+use Lishack\Combinatorics\Combinatorics;
 use Lishack\Combinatorics\Exception\InvalidCombinatoricsArgument;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(FactorialCalculator::class)]
+#[CoversMethod(Combinatorics::class, 'factorial')]
 class FactorialCalculatorTest extends TestCase
 {
     #[DataProvider('provideCalculate')]
@@ -20,7 +23,7 @@ class FactorialCalculatorTest extends TestCase
         string $expected,
     ): void {
         self::assertTrue(
-            FactorialCalculator::calculate($n)
+            Combinatorics::factorial($n)
                 ->isEqualTo(BigInteger::of($expected))
         );
     }
@@ -55,7 +58,7 @@ class FactorialCalculatorTest extends TestCase
     {
         $this->expectException(InvalidCombinatoricsArgument::class);
 
-        FactorialCalculator::calculate($n);
+        Combinatorics::factorial($n);
     }
 
     /**

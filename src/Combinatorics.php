@@ -249,7 +249,7 @@ final class Combinatorics
     /**
      * Creates a lazy generator that yields all combinations with repetition.
      *
-     * A combination with repetition is an unordered selection of `k` elements from
+     * A combination with repetition is an unordered selection of k elements from
      * a set where individual elements may be selected multiple times.
      *
      * Each combination is generated on demand without storing all combinations in memory.
